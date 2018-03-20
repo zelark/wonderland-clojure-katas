@@ -1,7 +1,8 @@
 (ns wonderland-number.finder)
 
-(defn have-same-digits? [& coll]
+(defn have-same-digits?
   "Returns true if all numbers in coll have the same digits."
+  [& coll]
   (->> (map (comp sort str) coll)
        (apply =)))
 
