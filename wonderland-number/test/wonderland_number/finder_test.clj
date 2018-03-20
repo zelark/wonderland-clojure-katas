@@ -16,3 +16,9 @@
       (is (hasAllTheSameDigits? wondernum (* 4 wondernum)))
       (is (hasAllTheSameDigits? wondernum (* 5 wondernum)))
       (is (hasAllTheSameDigits? wondernum (* 6 wondernum))))))
+
+(deftest test-narcissistic-numbers
+  (testing "There are just four numbers, which
+           are the sums of the cubes of their digits."
+    (is (= (narcissistic-numbers)
+           '(153 370 371 407)))))
