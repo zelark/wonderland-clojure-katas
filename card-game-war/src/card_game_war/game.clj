@@ -8,6 +8,20 @@
         rank ranks]
     [suit rank]))
 
-(defn play-round [player1-card player2-card])
+(defn- lower? [[suit-a rank-a] [suit-b rank-b]]
+  (if (= rank-a rank-b)
+    (< (.indexOf suits suit-a) (.indexOf suits suit-b))
+    (< (.indexOf ranks rank-a) (.indexOf ranks rank-b))))
 
-(defn play-game [player1-cards player2-cards])
+(defn play-round [card1 card2]
+  (if (lower? card1 card2) card2 card1))
+
+(defn play-game [[card1 & deck1 :as pl1-cards]
+                 [card2 & deck2 :as pl2-cards]]
+  (cond
+    (empty? pl1-cards) :player2
+    (empty? pl2-cards) :player1
+    :else
+      (if (= (play-round card1 card2) card1)
+        (recur (conj (vec deck1) card1 card2) deck2)
+        (recur deck1 (conj (vec deck2) card1 card2)))))
